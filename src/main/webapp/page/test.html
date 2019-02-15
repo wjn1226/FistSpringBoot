@@ -1,0 +1,44 @@
+<!--suppress ALL -->
+<html>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <TITLE>添加项目</TITLE>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <style>
+
+    </style>
+</HEAD>
+<body id="addbody" style="background: #eeeeee;">
+<h1 id="h1">东东sssssssss</h1>
+<div id="boy" style="background-color: aqua;width: 133;height: 33"></div>
+<div id="girl" style="background-color: pink;width: 133;height: 33"></div>
+<button id="btn" style="width: 100px; height: 100px; background-color: green">
+
+</button>
+</body>
+</html>
+<script>
+    $( "#btn" ).click(function () {
+        // $.get("/hi/param", {}, function (data) {
+        //     aa = data.name;
+        //     $("#h1").text(aa);
+        // });
+        $.get("/hi/sql",function (data) {
+            aa = data;
+            ff=data[0];
+            cc=data.map(function(item) {
+                return {
+                    mis: item.price,
+                    name: item.sex,
+                    sex: item.yy,
+                }
+            })
+            $("#boy").text("价钱"+aa[0].price);
+            $("#girl").text("价钱"+aa[1].price);
+            bb=cc[0];
+            // $("#h1").text(aa);
+        });
+    })
+
+</script>

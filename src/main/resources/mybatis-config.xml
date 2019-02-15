@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入 jdbc.properties-->
+    <!--<properties resource="jdbc.properties"/>-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="autoMappingBehavior" value="NONE"/>
+    </settings>
+    <!--别名，这里不使用别名，一律使用全限定名-->
+    <!--<typeAliases>-->
+    <!--<package name="com.examplemybatis.sqlENtiyt"/>-->
+    <!--</typeAliases>-->
+    <typeAliases>
+        <!--这里给实体类取别名，方便在mapper配置文件中使用 -->
+        <typeAlias alias="Film1" type="com.examplemybatis.sqlENtiyt.Film" />
+    </typeAliases>
+    <!--DB connection info,配置mybatis多套运行环境-->
+    <environments default="development">
+        <environment id="development">
+            <!--采用jdbc事务管理-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/testmysql"/>
+                <property name="username" value="root"/>
+                <property name="password" value="921226"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--大配置关联小配置-->
+    <mappers>
+        <!--关联单个小配置,不能重复关联-->
+        <!--注册IUserDAO.xml文件-->
+        <mapper resource="com/examplemybatis/dao/IUserDAO.xml"/>
+        <!--关联整个包,dao层接口名字和对应的xml名字要一样-->
+        <!--<package name="cn.happy.dao"/>-->
+    </mappers>
+</configuration>

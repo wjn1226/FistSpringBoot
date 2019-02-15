@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--&lt;!&ndash; 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的-->
+<mapper namespace="com.examplemybatis.dao.IUserDAO">
+    <!--大配置中settings autoMappingBehavior NONE,所以数据库只会装配以下column-->
+    <!--resultType="Film1"就表示将查询结果封装成一个Film1（在唯一指定的leiming）类的对象返回-->
+    <resultMap id="UserMapper" type="Film1">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="yy" column="yy"/>
+        <result property="price" jdbcType="VARCHAR" column="price"/>
+
+    </resultMap>
+
+    <!--id要与接口中的方法名相同-->
+    <select id="findAll" resultMap="UserMapper">
+        select * from Film WHERE id=1
+    </select>
+
+    <select id="getName" parameterType="int" resultMap="UserMapper">
+        select * from Film where id=#{id}
+    </select>
+
+    <select id="getsql" parameterType="String" resultMap="UserMapper">
+        select * from Film where name=#{name}
+    </select>
+    <select id="getYYnoName" parameterType="String" resultMap="UserMapper">
+        select * from Film where yy=#{yy}
+    </select>
+    <select id="insertSql" resultMap="UserMapper">
+        insert into Film(id,name,price,yy,sex,num) values (#{intID},"xiaoming","2","no",223,#{num})
+    </select>
+    <!--<resultMap id="filmResultMap" type="Film">-->
+        <!--<id property="id" column="id" />-->
+        <!--<result property="name" column="name" />-->
+        <!--<result property="sex" column="sex" />-->
+    <!--</resultMap>-->
+
+
+</mapper>
+
+<!--<mapper namespace="org.mybatis.example.BlogMapper">-->
+    <!--<select id="selectBlog" parameterType="int" resultType="Blog">-->
+ <!--select * from Film where id = #{id}-->
+ <!--</select>-->
+<!--</mapper>-->
